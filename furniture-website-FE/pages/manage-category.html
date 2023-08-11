@@ -1,0 +1,210 @@
+<div class="ms-64">
+    <ng-include src="'/components/admin-sidebar.html'"></ng-include>
+    <section class='shadow-sm dark:border-neutral-500 dark:shadow-sm dark:bg-gray-900'>
+        <div class='lg:gap-8 justify-between items-baseline py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 flex flex-wrap sm:py-8 lg:px-10'>
+            <div class='text-2xl font-bold dark:text-gray-300'>
+                Category
+            </div>
+            <div class=''>
+                <a href='#' class='font-bold dark:text-gray-300'>Home</a> <span class='mx-3 dark:text-gray-300'>/</span>
+                <span class='text-gray-700 dark:text-gray-300'>Category Management page</span>
+            </div>
+        </div>
+    </section>
+    <div class="m-10 p-5 border dark:border-gray-400 rounded-lg">
+        <section class="rounded-lg  flex justify-between align-baseline pb-5">
+            <div class=" text-2xl font-semibold text-gray-900 dark:text-gray-200 flex gap-3 align-middle">
+                <h4 class=" pl-5">Category Management</h4>
+                <button ng-click="showModalForCreate()" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    <span class="relative px-3 py-1.5 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Create
+                    </span>
+                </button>
+            </div>
+            <div class="">
+                <div class="relative ">
+                    <input ng-model='search' ng-model-options='{ debounce: 1000 }' type='text' id='table-search' class=' block p-2 px-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500' placeholder='Search category '>
+                    <div ng-if="search" ng-click="removeSearch()" class=' absolute cursor-pointer inset-y-0 right-0 flex items-center px-3 rounded-lg'>
+                        <ion-icon class="dark:text-gray-200" name="close-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-baseline gap-1">
+                                    Category id
+                                    <button ng-click="sortFiled('id')"><ion-icon name="caret-down-outline"></ion-icon></a>
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-baseline gap-1">
+                                    Category name
+                                    <button ng-click="sortFiled('name')"><ion-icon name="caret-down-outline"></ion-icon></a>
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-baseline gap-1">
+                                    Create at
+                                    <button ng-click="sortFiled('createdAt')"><ion-icon name="caret-down-outline"></ion-icon></a>
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-baseline gap-1">
+                                    Create by
+                                    <button ng-click="sortFiled('createdBy')"><ion-icon name="caret-down-outline"></ion-icon></a>
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="category in categories" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{category.id}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{category.name}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{category.createdAt}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{category.createdBy}}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button ng-click="showModalForEdit(category)" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                                    <span class="relative px-3 py-1.5 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                        Edit
+                                    </span>
+                                </button>
+                                <button ng-click="setRemoveCategory(category)" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                    <span class="relative px-3 py-1.5 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                        Delete
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex justify-between align-baseline mt-6">
+                <span class="dark:text-gray-200 pl-5 pt-1" ng-if="categories.length > 0">
+                    Showing
+                    <b>
+                        {{params.page === 0 ? 1 : params.page * params.pageSize}}
+                        -
+                        {{((params.page + 1) * params.pageSize) > totalItems ? totalItems :
+                        (params.page + 1) * params.pageSize }}
+                    </b>
+                    of
+                    <b> {{totalItems}}</b>
+                </span>
+                <section ng-if="totalPage >= 2" class="flex justify-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="inline-flex items-center -space-x-px gap-3">
+                            <li>
+                                <button ng-click="prevPage()"
+                                    class="{{params.page === 0 ? 'from-slate-300 to-gray-600 select-none cursor-default  dark:text-white  focus:outline-none' : 'from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800'}} relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br">
+                                    <span class="{{params.page !== 0 ? 'group-hover:bg-opacity-0' : ''}} relative px-3 py-2 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md ">
+                                        <ion-icon class="pt-1" name="chevron-back-outline"></ion-icon>
+                                    </span>
+                                </button>
+                            </li>
+                            <div ng-repeat="i in getTotalPage()">
+                                <button ng-click="changePage(i)"
+                                    class="{{i - 1 === params.page ? 'from-slate-300 to-gray-600 select-none cursor-default  dark:text-white  focus:outline-none' : 'from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800'}} relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br">
+                                    <span class="{{i - 1 !== params.page ? 'group-hover:bg-opacity-0' : ''}} relative px-3 py-2 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md ">
+                                        {{i}}
+                                    </span>
+                                </button>
+                            </div>
+
+                            <li>
+                                <button ng-click="nextPage()"
+                                    class="{{params.page === totalPage -1 ? 'from-slate-300 to-gray-600 select-none cursor-default  dark:text-white  focus:outline-none' : 'from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800'}} relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br">
+                                    <span class=" {{params.page !== totalPage -1 ? 'group-hover:bg-opacity-0' : ''}} relative px-3 py-2 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md ">
+                                        <ion-icon class="pt-1" name="chevron-forward-outline"></ion-icon>
+                                    </span>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- Cart Confirm -->
+<div id="deleteModal" tabindex="-1" aria-hidden="true" class="hidden dark:bg-gray-900 dark:bg-opacity-5 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <button ng-click="hideModal()" type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <ion-icon name="close-outline"></ion-icon>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <ion-icon class="dark:text-gray-300" name="trash-outline"></ion-icon>
+            <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to remove
+
+                <span class="dark:text-red-300 text-red-500">{{current.name}}</span>
+                category?
+            </p>
+            <div class="flex justify-center items-center space-x-4">
+                <button ng-click="hideModal()" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    No, cancel
+                </button>
+                <button ng-click="removeCurrentCategory()" type="submit" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                    Yes, I'm sure
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main modal -->
+<div id="category-modal" tabindex="-1" aria-hidden="true" class="hidden dark:bg-gray-900 dark:bg-opacity-5 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 dark:border-gray-400 dark:border">
+            <button ng-click="hideModalCategory()" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <ion-icon name="close-outline"></ion-icon>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white flex align-middle gap-3">
+                    CATEGORY FORM
+                    <span ng-hide="current" class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                        <span class="w-2 h-2 mr-1 bg-green-500 rounded-full"></span>
+                        Create
+                    </span>
+                    <span ng-show="current" class="inline-flex items-center bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                        <span class="w-2 h-2 mr-1 bg-blue-500 rounded-full"></span>
+                        Edit
+                    </span>
+                </h3>
+                <form class="space-y-6" action="#">
+                    <div>
+                        <label for="categoryName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category name: </label>
+                        <input ng-model="categoryForm.name" type="text" name="categoryName" id="categoryName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Ex: Plant, Chair, ..." required>
+                    </div>
+
+                    <button ng-click="submit()" ng-show="current" type="button" class="w-full text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Edit
+                    </button>
+                    <button ng-click="submit()" ng-hide="current" type="button" class="w-full text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Create
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

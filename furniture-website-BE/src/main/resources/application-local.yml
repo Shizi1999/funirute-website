@@ -1,0 +1,58 @@
+spring:
+  jpa:
+    show-sql: true
+    naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/furniture_be?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: 1234
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 675245542216-meuakl1s2mf2a0voh25ml8hesnaqjkd5.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+app:
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:3001,http://localhost:8080,http://127.0.0.1:3000/,http://127.0.0.1:5500/
+
+  clientURL: http://localhost:3001
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3001/oauth2redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+image:
+  upload:
+    default:
+      directory: uploads
+    directory: images
+cloudinary:
+  cloudName: dypp55fbk
+  cloudApiKey: 214414611585452
+  cloudSecretKey: 4VeEezVE_n2C91mVAyfyTkbGbVw
+
+
+
+
